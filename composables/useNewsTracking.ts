@@ -37,8 +37,8 @@ export function useNewsTracking(variant: Ref<'A' | 'B'>, sessionId: Ref<string>)
     if (tracker.isViewed(newsId)) return
     tracker.markViewed(newsId)
 
-    if (ymId && typeof window !== 'undefined' && (window as any)[`yaCounter${ymId}`]) {
-      ;(window as any)[`yaCounter${ymId}`].reachGoal('news_viewed', {
+    if (ymId && typeof window !== 'undefined' && typeof (window as any).ym === 'function') {
+      ;(window as any).ym(ymId, 'reachGoal', 'news_viewed', {
         id: newsId,
         variant: variant.value,
       })
