@@ -1,0 +1,20 @@
+# Nuxt
+.nuxt/
+.output/
+dist/
+
+# Node
+node_modules/
+
+# Env
+.env
+.env.local
+
+# Vercel
+.vercel/
+
+# Coverage
+coverage/
+
+# OS
+.DS_Store
