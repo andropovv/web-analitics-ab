@@ -28,6 +28,13 @@ const feedComponent = computed(() =>
   variant.value === 'A' ? LoadMoreFeed : InfiniteScrollFeed,
 )
 
+onMounted(() => {
+  const w = window as any
+  if (typeof w.ym === 'function' && variant.value) {
+    w.ym(useRuntimeConfig().public.ymCounterId, 'params', { variant: variant.value })
+  }
+})
+
 useHead({
   title: 'NewsFlow — главная',
 })
