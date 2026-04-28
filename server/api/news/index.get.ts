@@ -7,7 +7,8 @@ export default defineEventHandler((event) => {
   const page = Math.max(1, Number(query.page) || 1)
   const pageSize = Math.min(50, Math.max(1, Number(query.pageSize) || 12))
   const category = query.category as Category | undefined
+  const q = (query.q as string | undefined)?.trim() || undefined
 
-  const filtered = filterNews(NEWS, category)
+  const filtered = filterNews(NEWS, category, q)
   return paginateNews(filtered, page, pageSize)
 })

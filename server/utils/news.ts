@@ -2,9 +2,17 @@ import type { NewsItem, Category } from '../../data/news'
 
 const DEFAULT_PAGE_SIZE = 12
 
-export function filterNews(items: NewsItem[], category: Category | undefined): NewsItem[] {
-  if (!category) return items
-  return items.filter(item => item.category === category)
+export function filterNews(items: NewsItem[], category: Category | undefined, q?: string): NewsItem[] {
+  let result = category ? items.filter(item => item.category === category) : items
+  if (q) {
+    const needle = q.toLowerCase()
+    result = result.filter(
+      item =>
+        item.title.toLowerCase().includes(needle) ||
+        item.excerpt.toLowerCase().includes(needle),
+    )
+  }
+  return result
 }
 
 export interface PaginatedNews {

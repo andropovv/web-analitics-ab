@@ -34,11 +34,13 @@ const props = defineProps<{
   variant: 'A' | 'B'
   sessionId: string
   category: Category | undefined
+  searchQuery?: string
 }>()
 
-const { items, hasMore, loading, load, setCategory } = useNewsFeed()
+const { items, hasMore, loading, load, setCategory, setQuery } = useNewsFeed()
 
 watch(() => props.category, (cat) => setCategory(cat))
+watch(() => props.searchQuery, (q) => setQuery(q ?? ''))
 
 onMounted(() => load())
 </script>

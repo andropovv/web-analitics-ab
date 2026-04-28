@@ -14,6 +14,7 @@ export function useNewsFeed(initialCategory?: Category) {
   const hasMore = ref(true)
   const loading = ref(false)
   const category = ref<Category | undefined>(initialCategory)
+  const query = ref('')
 
   async function load(reset = false) {
     if (loading.value) return
@@ -28,6 +29,7 @@ export function useNewsFeed(initialCategory?: Category) {
 
       const params: Record<string, string | number> = { page: page.value }
       if (category.value) params.category = category.value
+      if (query.value) params.q = query.value
 
       const data = await $fetch<FeedResponse>('/api/news', { params })
 
@@ -44,5 +46,10 @@ export function useNewsFeed(initialCategory?: Category) {
     load(true)
   }
 
-  return { items, hasMore, loading, load, setCategory, category }
+  function setQuery(q: string) {
+    query.value = q
+    load(true)
+  }
+
+  return { items, hasMore, loading, load, setCategory, setQuery, category, query }
 }

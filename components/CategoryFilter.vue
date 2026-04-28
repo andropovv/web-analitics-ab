@@ -38,8 +38,8 @@ const categories = CATEGORIES
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
-  top: 56px;
-  z-index: 90;
+  top: 97px;
+  z-index: 88;
 }
 .category-filter__list {
   display: flex;
